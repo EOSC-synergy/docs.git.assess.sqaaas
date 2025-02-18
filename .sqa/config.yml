@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/OSTrails/docs:
+      branch: main
+      repo: https://github.com/OSTrails/docs.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/OSTrails/docs git:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-aqua-insect.sh
+        container: qc.acc_nippy-tan-crane
+  QC.Doc:
+    repos:
+      github.com/OSTrails/docs find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-cerulean-bonobo.sh
+        container: qc.doc_hazy-platinum-paradise
+      github.com/OSTrails/docs git:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-eggplant-bee.sh
+        container: qc.doc_scanty-denim-leopard
+      github.com/OSTrails/docs markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-tan-wolverine.sh
+        container: qc.doc_leaky-green-devil
+      github.com/OSTrails/docs restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-amethyst-spitz.sh
+        container: qc.doc_lumpy-ecru-abyssinian
+  QC.Lic:
+    repos:
+      github.com/OSTrails/docs licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-pear-bobcat.sh
+        container: qc.lic_grumpy-aqua-tang
+  QC.Sec:
+    repos:
+      github.com/OSTrails/docs bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.bumpy-viridian-devil.sh
+        container: qc.sec_gummy-yellow-tetra
+  QC.Sty:
+    repos:
+      github.com/OSTrails/docs flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-gamboge-chinook.sh
+        container: qc.sty_homely-lavender-dachshund
+  QC.Uni:
+    repos:
+      github.com/OSTrails/docs pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-cornflower-bird.sh
+        container: qc.uni_stuffy-coral-dunker
+  QC.Ver:
+    repos:
+      github.com/OSTrails/docs get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-platinum-duck.sh
+        container: qc.ver_messy-jade-toucan
+timeout: 5400
